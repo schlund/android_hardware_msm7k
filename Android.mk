@@ -22,6 +22,8 @@ ifeq ($(TARGET_PROVIDES_LIBAUDIO),true)
 else ifneq ($(TARGET_PROVIDES_LIBAUDIO),)
     # Target provides a full path to its libaudio
     LIBAUDIO := $(TARGET_PROVIDES_LIBAUDIO)
+else ifeq ($(TARGET_USES_WINCEAUDIENCE),true)
+	LIBAUDIO := libaudio-wince libacoustic
 endif
 
 LIBRPC := librpc
@@ -54,7 +56,7 @@ else ifeq ($(TARGET_BOARD_PLATFORM),msm7x30)
     include $(call all-named-subdir-makefiles,$(msm7x30_dirs))
 else ifeq ($(TARGET_BOARD_PLATFORM_GPU),qcom-adreno200)
     ### MSM7k with Adreno GPU
-    msm7k_adreno_dirs := $(common_msm_dirs) boot libgralloc-qsd8k $(LIBAUDIO)
+	msm7k_adreno_dirs := $(common_msm_dirs) boot libgralloc-qsd8k $(LIBAUDIO)
     include $(call all-named-subdir-makefiles,$(msm7k_adreno_dirs))
 else ifeq ($(TARGET_BOARD_PLATFORM),msm7k)
     ### Other MSM7k
